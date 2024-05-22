@@ -60,6 +60,19 @@ public class UserDAO {
         }
         return isValidUser;
     }
+
+    public boolean checkUserExist(String email) throws SQLException {
+        String sql = "SELECT id FROM users WHERE email = ?";
+        boolean userExist = false;
+
+        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+            userExist = rs.next();
+        }
+        return userExist;
+    }
 }
 
 // User model class

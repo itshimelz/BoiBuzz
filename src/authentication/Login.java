@@ -5,12 +5,16 @@ import database.UserDAO;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import main.Main;
 import net.miginfocom.swing.MigLayout;
 import raven.toast.Notifications;
 
@@ -39,23 +43,23 @@ public class Login extends JPanel {
                 Notifications.getInstance().show(Notifications.Type.ERROR, "Password cannot be empty.");
                 return;
             }
-            
-//            String email = userEmailField.getText();
-//            String password = new String(userPasswordField.getPassword());
-//            
-//            User user = userDAO.getUserByEmail(email);
-//            if (user != null) {
-//                System.out.println("User found:");
-//                System.out.println("ID: " + user.getId());
-//                System.out.println("First Name: " + user.getFirstName());
-//                System.out.println("Last Name: " + user.getLastName());
-//                System.out.println("Gender: " + user.getGender());
-//                System.out.println("Email: " + user.getEmail());
-//            } else {
-//                System.out.println("No user found with the email: " + email);
-//            }
 
-            Notifications.getInstance().show(Notifications.Type.SUCCESS, "Login successful!");
+            String email = userEmailField.getText();
+            String password = new String(userPasswordField.getPassword());
+
+            try {
+                if (userDAO.checkUserCredentials(email, password)) {
+                    Notifications.getInstance().show(Notifications.Type.SUCCESS, "Login successful!");
+                    Main.getInstance().setIsLoggedIn(true);
+                    Main.getInstance().init();
+                    Main.getInstance().setVisible(true);
+                    FormsManager.getInstance().disposeAuthentication();
+                } else {
+                    Notifications.getInstance().show(Notifications.Type.ERROR, "User not found!");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         });
 

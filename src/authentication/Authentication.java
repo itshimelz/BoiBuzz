@@ -9,6 +9,7 @@ public class Authentication extends JFrame {
     private boolean frameCloseResponse = false;
     private boolean loginButtonClicked = false;
     private boolean signUpButtonClicked = false;
+    private static Authentication instance;
 
     public Authentication() {
         init();
@@ -55,5 +56,12 @@ public class Authentication extends JFrame {
                 frameCloseResponse = true;
             }
         });
+    }
+    
+        public static Authentication getInstance() {
+        if (instance == null) {
+            instance = new Authentication();
+        }
+        return instance;
     }
 }

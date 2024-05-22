@@ -1,6 +1,7 @@
 package main;
 
 import authentication.Authentication;
+import authentication.FormsManager;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
@@ -9,10 +10,13 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Font;
 import javax.swing.UIManager;
 
-public class Main extends javax.swing.JFrame {
+public final class Main extends javax.swing.JFrame {
 
-    public static boolean isLoggedin = false;
-    private Authentication authInstance = new Authentication();
+//    private final boolean isAuthVisible = false;
+    private static Main instance;
+    private boolean isLoggedIn = false;
+
+    private Authentication authInstance = Authentication.getInstance();
 
     public Main() {
         initComponents();
@@ -240,6 +244,8 @@ public class Main extends javax.swing.JFrame {
     private void aLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aLoginButtonActionPerformed
         if (!authInstance.isVisible()) {
             authInstance.setLoginButtonClicked(true);
+            this.dispose();
+            FormsManager.getInstance().initAuthentication(authInstance);
             authInstance.setVisible(true);
         }
 
@@ -248,6 +254,8 @@ public class Main extends javax.swing.JFrame {
     private void aSignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aSignUpButtonActionPerformed
         if (!authInstance.isVisible()) {
             authInstance.setSignUpButtonClicked(true);
+            this.dispose();
+            FormsManager.getInstance().initAuthentication(authInstance);
             authInstance.setVisible(true);
         }
     }//GEN-LAST:event_aSignUpButtonActionPerformed
@@ -273,8 +281,8 @@ public class Main extends javax.swing.JFrame {
 
     }
 
-    void init() {
-        if (isLoggedin) {
+    public void init() {
+        if (isLoggedIn) {
             createAccountPanel.setVisible(false);
             revalidate();
             repaint();
@@ -313,6 +321,22 @@ public class Main extends javax.swing.JFrame {
         lbPopularBooks.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +5;");
     }
+
+    public boolean isIsLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setIsLoggedIn(boolean isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
+    }
+
+    public static Main getInstance() {
+        if (instance == null) {
+            instance = new Main();
+        }
+        return instance;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aDesLabel;

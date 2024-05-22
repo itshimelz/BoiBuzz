@@ -31,6 +31,10 @@ public class FormsManager {
     public void initAuthentication(Authentication authentication) {
         this.authentication = authentication;
     }
+    
+        public void disposeAuthentication() {
+        authentication.dispose();
+    }
 
     public void showForm(JComponent form) {
         EventQueue.invokeLater(() -> {

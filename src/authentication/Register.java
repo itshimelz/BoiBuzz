@@ -50,7 +50,7 @@ public class Register extends JPanel {
                         userGender = "Female";
                     }
                     String password = new String(passwordField.getPassword());
-                    
+
                     try {
                         userDAO.addUser(firstName, lastName, userGender, email, password);
                     } catch (SQLException ex) {
@@ -159,7 +159,7 @@ public class Register extends JPanel {
     }
 
     private boolean validateFields() throws SQLException {
-        
+
         // Check if the first name field is empty
         if (firstNameField.getText().trim().isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.ERROR, "First name cannot be empty.");
@@ -190,10 +190,12 @@ public class Register extends JPanel {
             return false;
         }
 
-//        if (userDAO.getUserByEmail(emailField.getText().trim()) == null) {
-//            Notifications.getInstance().show(Notifications.Type.ERROR, "This user already have an account.");
-//            return false;
-//        }
+        String email = emailField.getText();
+
+        if (userDAO.checkUserExist(email)) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, "This user already have an account.");
+            return false;
+        }
         return true;
     }
 
