@@ -2,6 +2,7 @@ package authentication;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import main.Main;
 import raven.toast.Notifications;
 
 public class Authentication extends JFrame {
@@ -13,6 +14,7 @@ public class Authentication extends JFrame {
 
     public Authentication() {
         init();
+        initializeWindowListener();
     }
 
     public void setLoginButtonClicked(boolean loginButtonClicked) {
@@ -36,29 +38,34 @@ public class Authentication extends JFrame {
     }
 
     private void updateContentPane() {
-        if (this.loginButtonClicked) {
+        if (loginButtonClicked) {
             setContentPane(new Login());
-        } else if (this.signUpButtonClicked) {
+        } else if (signUpButtonClicked) {
             setContentPane(new Register());
         }
         revalidate();
         repaint();
     }
 
-    public boolean getFrameCloseResponse() {
-        return frameCloseResponse;
-    }
-
+//    public boolean getFrameCloseResponse() {
+//        return frameCloseResponse;
+//    }
+//
     public void initializeWindowListener() {
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                Main.getInstance().init();
+                Main.getInstance().setVisible(true);
+                loginButtonClicked = false;
+                signUpButtonClicked = false;
+                instance.dispose();
                 frameCloseResponse = true;
             }
         });
     }
-    
-        public static Authentication getInstance() {
+
+    public static Authentication getInstance() {
         if (instance == null) {
             instance = new Authentication();
         }

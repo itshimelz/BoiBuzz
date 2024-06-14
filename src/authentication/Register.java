@@ -52,7 +52,7 @@ public class Register extends JPanel {
                     String password = new String(passwordField.getPassword());
 
                     try {
-                        userDAO.addUser(firstName, lastName, userGender, email, password);
+                        userDAO.addUser(firstName, lastName, userGender, email, password, true);
                     } catch (SQLException ex) {
                         Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
                     }

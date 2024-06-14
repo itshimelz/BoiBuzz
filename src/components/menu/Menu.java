@@ -34,15 +34,18 @@ public class Menu extends JPanel {
         add(scroll);
         addTitle("MAIN");
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.HOME, "Home"));
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.SMOKE_FREE, "Poular Now"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.SMOKE_FREE, "Popular Now"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.EVENT_AVAILABLE, "Event"));
-        addTitle("POPULAR WRITERS");
+        addTitle("POPULAR GENERS");
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.BOOK, "Novels", "Humayun Ahmed", "Chetan Bhagat", "Muhammad Zafar Iqbal", "Selina Hossain", "Syed Shamsul Haq", "Tahmima Anam"));
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.BOOK, "Short Stories", "Somresh Mojumdar"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.BOOK, "Detective", "Somresh Mojumdar"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.BOOK, "Biography", "Kazi Nazrul Islam", "Anisul Haque"));
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.BOOK, "Mystery, Detective", "Falguni Mukhopadhyay"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.BOOK, "Mystery", "Rakib Hasan", "Dan Brown"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.BOOK, "Science Fiction", "Muhammad Zafar Iqbal"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.BOOK, "West Bengal Books", "Bankim Chandra Chattopadhyay"));
+        addTitle("POPULAR WRITERS");
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.BOOK, "Humayun Ahmed"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.BOOK, "Kazi Nazrul Islam"));
 
     }
 

@@ -11,8 +11,8 @@ public class UserDAO {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public void addUser(String firstName, String lastName, String gender, String email, String password) throws SQLException {
-        String sql = "INSERT INTO users (first_name, last_name, gender, email, password) VALUES (?, ?, ?, ?, ?)";
+    public void addUser(String firstName, String lastName, String gender, String email, String password, boolean rememberMe) throws SQLException {
+        String sql = "INSERT INTO users (first_name, last_name, gender, email, password, rememberMe) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -20,7 +20,8 @@ public class UserDAO {
             pstmt.setString(2, lastName);
             pstmt.setString(3, gender);
             pstmt.setString(4, email);
-            pstmt.setString(5, password); // Consider using password hashing
+            pstmt.setString(5, password);
+            pstmt.setBoolean(6, false);
             pstmt.executeUpdate();
         }
     }
@@ -84,6 +85,7 @@ class User {
     private String gender;
     private String email;
     private String password;
+    private boolean rememberMe;
 
     public int getId() {
         return id;
@@ -131,5 +133,13 @@ class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
 }

@@ -31,8 +31,8 @@ public class FormsManager {
     public void initAuthentication(Authentication authentication) {
         this.authentication = authentication;
     }
-    
-        public void disposeAuthentication() {
+
+    public void disposeAuthentication() {
         authentication.dispose();
     }
 

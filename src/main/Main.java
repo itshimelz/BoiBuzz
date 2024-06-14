@@ -7,15 +7,24 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import components.HomePanel;
+import components.Item;
+import event.EventBook;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import model.BookModel;
 
 public final class Main extends javax.swing.JFrame {
 
 //    private final boolean isAuthVisible = false;
     private static Main instance;
     private boolean isLoggedIn = false;
-
+//    private boolean rememberMe = false;
+//    private HomePanel homePanel;
     private Authentication authInstance = Authentication.getInstance();
 
     public Main() {
@@ -40,9 +49,7 @@ public final class Main extends javax.swing.JFrame {
         searchTextField = new javax.swing.JTextField();
         notiButton = new components.Button();
         jSeparator1 = new javax.swing.JSeparator();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        lbPopularBooks = new javax.swing.JLabel();
+        homePanel1 = new components.HomePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -155,7 +162,7 @@ public final class Main extends javax.swing.JFrame {
             hederPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hederPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(searchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                .addComponent(searchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
                 .addGap(75, 75, 75)
                 .addComponent(notiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -173,44 +180,17 @@ public final class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane1.setOpaque(false);
-
-        jList1.setBorder(null);
-        jList1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jList1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jList1.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
-        jList1.setOpaque(false);
-        jScrollPane1.setViewportView(jList1);
-
-        lbPopularBooks.setBackground(new java.awt.Color(20, 20, 20));
-        lbPopularBooks.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        lbPopularBooks.setText("POPULAR BOOKS");
-
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(0, 0, 0)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1)
-                            .addComponent(jScrollPane1)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(lbPopularBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addComponent(hederPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(hederPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addComponent(homePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,19 +198,16 @@ public final class Main extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(hederPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(lbPopularBooks)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(homePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1210, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,6 +259,7 @@ public final class Main extends javax.swing.JFrame {
     }
 
     public void init() {
+//        rootScrollPane.setVerticalScrollBar(new ScrollBar());
         if (isLoggedIn) {
             createAccountPanel.setVisible(false);
             revalidate();
@@ -318,8 +296,8 @@ public final class Main extends javax.swing.JFrame {
                 + "innerFocusWidth:0;"
                 + "margin:8,18,8,18;"
                 + "background:$Panel.background");
-        lbPopularBooks.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font:bold +5;");
+//        lbPopularBooks.putClientProperty(FlatClientProperties.STYLE, ""
+//                + "font:bold +5;");
     }
 
     public boolean isIsLoggedIn() {
@@ -345,11 +323,9 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JLabel aTitleLabel;
     private javax.swing.JPanel createAccountPanel;
     private javax.swing.JPanel hederPanel;
+    private components.HomePanel homePanel1;
     private components.ImageAvatar imageAvatar;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lbPopularBooks;
     private javax.swing.JPanel mainPanel;
     private components.menu.Menu menu1;
     private javax.swing.JPanel menuPanel;
