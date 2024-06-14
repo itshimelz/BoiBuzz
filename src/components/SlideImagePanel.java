@@ -30,7 +30,7 @@ public class SlideImagePanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        pictureBox1.setImage(new javax.swing.ImageIcon(getClass().getResource("/main/Jeff Bezos.jpg"))); // NOI18N
+        pictureBox1.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/banner1.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

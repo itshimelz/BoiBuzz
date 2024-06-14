@@ -1,12 +1,6 @@
 package components;
 
-import event.EventBook;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
-import javax.swing.SwingUtilities;
 import model.BookModel;
 import swing.ScrollBar;
 
@@ -14,42 +8,29 @@ public class HomePanel extends javax.swing.JPanel {
 
     public HomePanel() {
         initComponents();
+        init();
         slideshow1.initSlideshow(new SlideImagePanel(), new SlideImagePanel2());
     }
 
     public void init() {
-        publicationScrollPane.setHorizontalScrollBar(new ScrollBar());
-//        testData();
+        publicationScrollPane.setVerticalScrollBar(new ScrollBar());
     }
-    
-//    private void testData() {
-//        int ID = 1;
-//        for (int i = 0; i <= 5; i++) {
-//            publicationPanel.addBook(new BookModel(ID++, "Ammar Ache Jal", "Humayun Ahmed", "Test", 160, new ImageIcon(getClass().getResource("/icons/Eliot.jpg"))));
-//        }
-//    }
-//
-//    private EventBook event;
-//
-//    public void addBook(BookModel data) {
-//        Item item = new Item();
-//        item.setData(data);
-//        item.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mousePressed(MouseEvent me) {
-//                if (SwingUtilities.isLeftMouseButton(me)) {
-//                    event.itemClick(item, data);
-//                }
-//            }
-//        });
-//        publicationPanel.add(item);
-//        publicationPanel.repaint();
-//        publicationPanel.revalidate();
-//    }
 
-    
+    public void testData() {
+        int ID = 1;
+        for (int i = 0; i <= 5; i++) {
+            addBook(new BookModel(ID++, "Ammar Ache Jal", "Humayun Ahmed", "Test", 160, new ImageIcon(getClass().getResource("/icons/Eliot.jpg"))));
+        }
+    }
 
-    
+    public void addBook(BookModel data) {
+        Item item = new Item();
+        item.setData(data);
+        publicationPanel.add(item);
+        repaint();
+        revalidate();
+        
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -63,6 +44,8 @@ public class HomePanel extends javax.swing.JPanel {
         publicationPanel = new javax.swing.JPanel();
         item2 = new components.Item();
         item3 = new components.Item();
+        item1 = new components.Item();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -88,19 +71,25 @@ public class HomePanel extends javax.swing.JPanel {
                 .addComponent(item3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(item2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(685, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(item1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(379, Short.MAX_VALUE))
         );
         publicationPanelLayout.setVerticalGroup(
             publicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, publicationPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(publicationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(item2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(item3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(item3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(item1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         publicationScrollPane.setViewportView(publicationPanel);
+
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel1.setText("BOOKS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -108,14 +97,16 @@ public class HomePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(slideshow1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(0, 0, 0)
-                            .addComponent(publicationScrollPane)))
+                    .addComponent(slideshow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(publicationScrollPane)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(publicationsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(publicationsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -128,14 +119,18 @@ public class HomePanel extends javax.swing.JPanel {
                 .addComponent(publicationsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(publicationScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private components.Item item1;
     private components.Item item2;
     private components.Item item3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel publicationPanel;
     private javax.swing.JScrollPane publicationScrollPane;
@@ -144,7 +139,4 @@ public class HomePanel extends javax.swing.JPanel {
     private slideshow.Slideshow slideshow1;
     // End of variables declaration//GEN-END:variables
 
-    public void addBook(BookModel bookModel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

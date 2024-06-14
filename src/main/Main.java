@@ -8,15 +8,8 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import components.HomePanel;
-import components.Item;
-import event.EventBook;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.ImageIcon;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import model.BookModel;
 
 public final class Main extends javax.swing.JFrame {
 
@@ -24,7 +17,7 @@ public final class Main extends javax.swing.JFrame {
     private static Main instance;
     private boolean isLoggedIn = false;
 //    private boolean rememberMe = false;
-//    private HomePanel homePanel;
+    private HomePanel homePanel = new HomePanel();
     private Authentication authInstance = Authentication.getInstance();
 
     public Main() {
@@ -259,6 +252,9 @@ public final class Main extends javax.swing.JFrame {
     }
 
     public void init() {
+        homePanel.testData();
+        revalidate();
+        repaint();
 //        rootScrollPane.setVerticalScrollBar(new ScrollBar());
         if (isLoggedIn) {
             createAccountPanel.setVisible(false);
